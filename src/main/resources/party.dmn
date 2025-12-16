@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_C550657A-1516-4B94-92A5-8613A052F7EE" id="_7C49E3DB-E4BF-4170-B2E6-7231A4AB1CC1" name="DMN_318F5DE4-BE6D-4DB7-B371-7ED04F6CE0DD" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0">
+  <inputData name="Day of the week" id="_AC308068-FECC-4089-96AF-E4FADA87220F">
+    <variable name="Day of the week" id="_E4812B7D-402B-4D14-A401-4A388336C9C5" />
+  </inputData>
+  <decision name="Party" id="_BF13B278-9F52-4DA6-81AB-CE3C3B24DA7A">
+    <variable name="Party" id="_B9AAA6C6-262F-4538-AFD2-15E2077469DA" />
+    <informationRequirement id="_23669D9B-2FC4-4E85-8E49-69B1B6DB97EE">
+      <requiredInput href="#_AC308068-FECC-4089-96AF-E4FADA87220F" />
+    </informationRequirement>
+    <decisionTable id="_7CD4646B-7716-45B6-A6C4-7B4A95FF406A" hitPolicy="UNIQUE" label="Party">
+      <input id="_910018F5-9DE7-45DD-B77A-E725A7326456">
+        <inputExpression id="_4A602009-DB50-43CB-965F-EF4E687106A6">
+          <text>Day of the week</text>
+        </inputExpression>
+      </input>
+      <output id="_7EC3917D-2BB9-41A8-B6A4-70129434E8E7" />
+      <annotation name="Annotations" />
+      <rule id="_71EDBF54-2170-4D8C-AD03-D37868E2A6DB">
+        <inputEntry id="_3DCAB56A-46BF-4B27-8F9C-8DEF11361C7E">
+          <text>&quot;Sunday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_C9DEFF17-ED80-42DB-B717-1AE467516C0D">
+          <text>&quot;Yes&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_80A31996-67F5-4974-85BA-56DDD9DAA125">
+        <inputEntry id="_0276548B-C935-4B4C-9478-DDE16CA7B5FB">
+          <text>&quot;Monday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_C4B2FB57-4282-41D0-BC40-BCFF9AF23DA2">
+          <text>&quot;No&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_99A3104E-7226-4C49-BF44-F3F3033A4E01">
+        <inputEntry id="_CA42612A-DB88-4A90-9654-6DA4B16C306B">
+          <text>&quot;Tuesday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_0EA0439D-ADC2-4039-8715-CA0CE297C27A">
+          <text>&quot;No&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_12CD54B3-E4AB-4AF6-9C3F-2C01A24B655C">
+        <inputEntry id="_F40227FB-56C4-4B9C-B84E-C370CF9888C2">
+          <text>&quot;Wednesday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_A89AB163-C092-4DC7-9C69-B21D39E63380">
+          <text>&quot;No&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_90157CF0-A315-43D0-8714-C39F4E65C061">
+        <inputEntry id="_A045C42C-03A4-4A1E-A542-CCA6BC9FED77">
+          <text>&quot;Thursday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_EC6B92A0-09E9-42D6-9CA9-2AF132CD6C20">
+          <text>&quot;No&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_DCF14095-FC3B-404D-98C5-CBE81F4071BE">
+        <inputEntry id="_CB2F0208-5AC4-4B7E-A9FD-1DF3A65E244E">
+          <text>&quot;Friday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_A774FD5F-15C4-4B9F-A2DF-C89F1AB74063">
+          <text>&quot;No&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+      <rule id="_63BA8AE8-8725-4DDF-9B04-C959FD9DFB29">
+        <inputEntry id="_600DBA9A-0CFE-458F-9CA7-A81E24F79C9E">
+          <text>&quot;Saturday&quot;</text>
+        </inputEntry>
+        <outputEntry id="_D11D30E1-D9C5-4407-A9D3-755315B6F58D">
+          <text>&quot;Yes&quot;</text>
+        </outputEntry>
+        <annotationEntry>
+          <text></text>
+        </annotationEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_0D8E943C-B3B9-4011-AECE-9517B3814EBF" name="Default DRD" useAlternativeInputDataShape="false">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_7CD4646B-7716-45B6-A6C4-7B4A95FF406A">
+            <kie:width>60</kie:width>
+            <kie:width>119</kie:width>
+            <kie:width>118</kie:width>
+            <kie:width>240</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="_5502D4AF-1C97-4393-9E97-A56FC0EF5879" dmnElementRef="_AC308068-FECC-4089-96AF-E4FADA87220F" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="380" y="320" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="_1B38C8CF-53BA-4EDB-9026-9CA6C2F7CBAD" dmnElementRef="_BF13B278-9F52-4DA6-81AB-CE3C3B24DA7A" isCollapsed="false" isListedInputData="false">
+        <dc:Bounds x="380" y="100" width="160" height="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="_A2ED65EB-1614-4655-99DF-ECFBCF31B46C" dmnElementRef="_23669D9B-2FC4-4E85-8E49-69B1B6DB97EE" sourceElement="_5502D4AF-1C97-4393-9E97-A56FC0EF5879" targetElement="_1B38C8CF-53BA-4EDB-9026-9CA6C2F7CBAD">
+        <di:waypoint x="460" y="360" />
+        <di:waypoint x="460" y="140" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
