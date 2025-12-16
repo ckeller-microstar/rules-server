@@ -26,7 +26,7 @@ public class PartyDecisionResource {
   public PartyDecisionResource() {
     KieServices kieServices = KieServices.Factory.get();
     KieContainer kieContainer = kieServices.getKieClasspathContainer();
-    KieSession kieSession = kieContainer.newKieSession();
+    KieSession kieSession = kieContainer.newKieSession("party-ksession");
     this.dmnRuntime = kieSession.getKieRuntime(DMNRuntime.class);
     this.dmnModel =
         dmnRuntime.getModel(
