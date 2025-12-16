@@ -3,4 +3,7 @@
     <kbase name="party-kbase" packages="party">
         <ksession name="party-ksession" />
     </kbase>
+    <kbase name="kegcollection-kbase" packages="com.microstar.rules.kegcollection">
+        <ksession name="keg-collection-ksession" />
+    </kbase>
 </kmodule>
