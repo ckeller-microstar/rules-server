@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="https://kie.org/dmn/_C550657A-1516-4B94-92A5-8613A052F7EE" id="_7C49E3DB-E4BF-4170-B2E6-7231A4AB1CC1" name="DMN_318F5DE4-BE6D-4DB7-B371-7ED04F6CE0DD">
+<definitions xmlns="https://www.omg.org/spec/DMN/20230324/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20230324/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="https://kie.org/dmn/extensions/1.0" expressionLanguage="https://www.omg.org/spec/DMN/20230324/FEEL/" namespace="com.example.party" id="_7C49E3DB-E4BF-4170-B2E6-7231A4AB1CC1" name="Party Decision">
   <inputData name="Day of the week" id="_AC308068-FECC-4089-96AF-E4FADA87220F">
     <variable name="Day of the week" id="_E4812B7D-402B-4D14-A401-4A388336C9C5" typeRef="string" />
   </inputData>
-  <decision name="Party" id="_BF13B278-9F52-4DA6-81AB-CE3C3B24DA7A">
-    <variable name="Party" id="_B9AAA6C6-262F-4538-AFD2-15E2077469DA" typeRef="string" />
+  <decision name="Party Node" id="_BF13B278-9F52-4DA6-81AB-CE3C3B24DA7A">
+    <variable name="Party Node" id="_B9AAA6C6-262F-4538-AFD2-15E2077469DA" typeRef="string" />
     <informationRequirement id="_23669D9B-2FC4-4E85-8E49-69B1B6DB97EE">
       <requiredInput href="#_AC308068-FECC-4089-96AF-E4FADA87220F" />
     </informationRequirement>
-    <decisionTable id="_7CD4646B-7716-45B6-A6C4-7B4A95FF406A" hitPolicy="UNIQUE" label="Party" typeRef="string">
+    <decisionTable id="_7CD4646B-7716-45B6-A6C4-7B4A95FF406A" hitPolicy="UNIQUE" label="Party Node" typeRef="string">
       <input id="_910018F5-9DE7-45DD-B77A-E725A7326456">
         <inputExpression id="_4A602009-DB50-43CB-965F-EF4E687106A6" typeRef="string">
           <text>Day of the week</text>

@@ -28,10 +28,8 @@ public class PartyDecisionResource {
     KieContainer kieContainer = kieServices.getKieClasspathContainer();
     KieSession kieSession = kieContainer.newKieSession("party-ksession");
     this.dmnRuntime = kieSession.getKieRuntime(DMNRuntime.class);
-    this.dmnModel =
-        dmnRuntime.getModel(
-            "https://kie.org/dmn/_C550657A-1516-4B94-92A5-8613A052F7EE",
-            "DMN_318F5DE4-BE6D-4DB7-B371-7ED04F6CE0DD");
+    // this.dmnModel = dmnRuntime.getModelById("com.example.party", "_7C49E3DB-E4BF-4170-B2E6-7231A4AB1CC1");
+    this.dmnModel = dmnRuntime.getModel("com.example.party", "Party Decision");
   }
 
   @POST
@@ -44,7 +42,8 @@ public class PartyDecisionResource {
 
     DMNResult dmnResult = dmnRuntime.evaluateAll(dmnModel, dmnContext);
 
-    String partyDecision = (String) dmnResult.getDecisionResultByName("Party").getResult();
+    // String partyDecision = (String) dmnResult.getDecisionResultById("_BF13B278-9F52-4DA6-81AB-CE3C3B24DA7A").getResult();
+    String partyDecision = (String) dmnResult.getDecisionResultByName("Party Node").getResult();
 
     return new PartyResponse(request.dayOfWeek, partyDecision);
   }
