@@ -20,17 +20,21 @@ import org.kie.dmn.api.core.DMNRuntime;
 @Consumes(MediaType.APPLICATION_JSON)
 public class ChooseCollectorResource {
 
-  private final DMNRuntime dmnRuntime;
-  private final DMNModel dmnModel;
+  /** The namespace of the DMN file. Must match {@code ChooseCollector.dmn}. */
+  private static final String DMN_NAMESPACE =
+      "https://kiegroup.org/dmn/_50818297-FE5F-4D3C-BE75-E38399BB0470";
+
+  /** The DMN model. Must match {@code ChooseCollector.dmn}. */
+  private static final String DMN_MODEL_NAME = "ChooseCollector";
+
+  /** The named session. Must match {@code kmodule.xml}. */
+  private static final String DMN_KSESSION = "keg-collection-ksession";
+
+  private final KieContainer kieContainer;
 
   public ChooseCollectorResource() {
     KieServices kieServices = KieServices.Factory.get();
-    KieContainer kieContainer = kieServices.getKieClasspathContainer();
-    KieSession kieSession = kieContainer.newKieSession("keg-collection-ksession");
-    this.dmnRuntime = kieSession.getKieRuntime(DMNRuntime.class);
-    this.dmnModel =
-        dmnRuntime.getModel(
-            "https://kiegroup.org/dmn/_50818297-FE5F-4D3C-BE75-E38399BB0470", "ChooseCollector");
+    this.kieContainer = kieServices.getKieClasspathContainer();
   }
 
   @POST
@@ -45,26 +49,42 @@ public class ChooseCollectorResource {
       throw new IllegalArgumentException("Venue PostCode is required");
     }
 
-    DMNContext dmnContext = dmnRuntime.newContext();
+    try (KieSession kieSession = kieContainer.newKieSession(DMN_KSESSION)) {
+      DMNRuntime dmnRuntime = kieSession.getKieRuntime(DMNRuntime.class);
+      DMNModel dmnModel = dmnRuntime.getModel(DMN_NAMESPACE, DMN_MODEL_NAME);
 
-    // Create a map structure that matches the DMN tVenue type
+      if (dmnModel == null) {
+        throw new RuntimeException("DMN model not found: " + DMN_MODEL_NAME);
+      }
+
+      return executeDmn(request, dmnRuntime, dmnModel);
+    }
+  }
+
+  private static CollectorResponse executeDmn(
+      CollectorRequest request, DMNRuntime dmnRuntime, DMNModel dmnModel) {
+    DMNContext dmnContext = bindInputs(request, dmnRuntime);
+    DMNResult dmnResult = dmnRuntime.evaluateAll(dmnModel, dmnContext);
+    if (dmnResult.hasErrors()) {
+      throw new RuntimeException("DMN evaluation failed: " + dmnResult.getMessages());
+    }
+    return bindOutputs(dmnResult);
+  }
+
+  private static DMNContext bindInputs(CollectorRequest request, DMNRuntime dmnRuntime) {
+    DMNContext dmnContext = dmnRuntime.newContext();
     java.util.Map<String, Object> venueMap = new java.util.HashMap<>();
     venueMap.put("UUID", request.venue.UUID);
     venueMap.put("Name", request.venue.Name);
     venueMap.put("TapCustomerId", request.venue.TapCustomerId);
     venueMap.put("PostCode", request.venue.PostCode);
-
     dmnContext.set("Venue", venueMap);
+    return dmnContext;
+  }
 
-    DMNResult dmnResult = dmnRuntime.evaluateAll(dmnModel, dmnContext);
-
-    if (dmnResult.hasErrors()) {
-      throw new RuntimeException("DMN evaluation failed: " + dmnResult.getMessages());
-    }
-
+  private static CollectorResponse bindOutputs(DMNResult dmnResult) {
     String collectorName = (String) dmnResult.getDecisionResultByName("CollectorName").getResult();
     String collectorId = (String) dmnResult.getDecisionResultByName("CollectorId").getResult();
-
     return new CollectorResponse(collectorName, collectorId);
   }
 
