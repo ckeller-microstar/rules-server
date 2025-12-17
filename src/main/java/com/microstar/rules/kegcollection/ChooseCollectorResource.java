@@ -45,7 +45,7 @@ public class ChooseCollectorResource {
       throw new IllegalArgumentException("Request and venue cannot be null");
     }
 
-    if (request.venue.PostCode == null || request.venue.PostCode.trim().isEmpty()) {
+    if (request.venue.postCode == null || request.venue.postCode.trim().isEmpty()) {
       throw new IllegalArgumentException("Venue PostCode is required");
     }
 
@@ -74,10 +74,10 @@ public class ChooseCollectorResource {
   private static DMNContext bindInputs(CollectorRequest request, DMNRuntime dmnRuntime) {
     DMNContext dmnContext = dmnRuntime.newContext();
     java.util.Map<String, Object> venueMap = new java.util.HashMap<>();
-    venueMap.put("UUID", request.venue.UUID);
-    venueMap.put("Name", request.venue.Name);
-    venueMap.put("TapCustomerId", request.venue.TapCustomerId);
-    venueMap.put("PostCode", request.venue.PostCode);
+    venueMap.put("UUID", request.venue.uuid);
+    venueMap.put("Name", request.venue.name);
+    venueMap.put("TapCustomerId", request.venue.tapCustomerId);
+    venueMap.put("PostCode", request.venue.postCode);
     dmnContext.set("Venue", venueMap);
     return dmnContext;
   }
@@ -89,18 +89,18 @@ public class ChooseCollectorResource {
   }
 
   public static class Venue {
-    public String UUID;
-    public String Name;
-    public Integer TapCustomerId;
-    public String PostCode;
+    public String uuid;
+    public String name;
+    public Integer tapCustomerId;
+    public String postCode;
 
     public Venue() {}
 
-    public Venue(String UUID, String Name, Integer TapCustomerId, String PostCode) {
-      this.UUID = UUID;
-      this.Name = Name;
-      this.TapCustomerId = TapCustomerId;
-      this.PostCode = PostCode;
+    public Venue(String uuid, String name, Integer tapCustomerId, String postCode) {
+      this.uuid = uuid;
+      this.name = name;
+      this.tapCustomerId = tapCustomerId;
+      this.postCode = postCode;
     }
   }
 
