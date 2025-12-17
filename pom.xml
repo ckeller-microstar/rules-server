@@ -124,6 +124,28 @@
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>io.smallrye</groupId>
+                <artifactId>smallrye-open-api-maven-plugin</artifactId>
+                <version>3.11.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-openapi-json</id>
+                        <goals>
+                            <goal>generate-schema</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                        <configuration>
+                            <infoTitle>Microstar Rules Server API</infoTitle>
+                            <infoVersion>${project.version}</infoVersion>
+                            <infoDescription>API for Microstar Rules Server including keg collection and other business rules</infoDescription>
+                            <outputDirectory>${project.build.directory}/openapi</outputDirectory>
+                            <schemaFilename>openapi-spec</schemaFilename>
+                            <outputFileTypeFilter>JSON</outputFileTypeFilter>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
